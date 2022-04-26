@@ -1,10 +1,27 @@
 const express  = require('express');
-const port = 3333;
+const mysql = require('mysql');
 
 const app = express();
 
-app.get('/', (req, res) => res.send('<h1>Full cycle</h1>'));
+const port = 3000;
+const config = {
+  host: 'db',
+  user: 'root',
+  password: 'root',
+  database:'nodedb'
+};
 
-app.listen(port, () => {
-  console.log(`rodando na porta ${port}`);
+const connection = mysql.createConnection(config);
+
+const sql = `INSERT INTO people(name) values('André')`;
+connection.query(sql);
+connection.end();
+
+
+app.get('/', (req,res) => {
+    res.send('<h1>Full Cycle</h1>');
+});
+
+app.listen(port, ()=> {
+    console.log('Rodando na porta ' + port);
 });
