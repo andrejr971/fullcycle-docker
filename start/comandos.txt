@@ -1,0 +1,3 @@
+// derruba os container inativos
+docker rm $(docker ps -a -q)
+
